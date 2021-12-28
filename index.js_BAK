@@ -1,0 +1,164 @@
+//////////////////////////////////////
+//     this script is part of       //
+//            PRIVO WEB             //
+//         Version 1.0.0            //
+//      Coded by Davide Nadin       //
+//     J.F.Kennedy (Pordenone)      //
+//             5C_IA                //
+//   Released under MIT License     //
+//           2021-2022              //
+//////////////////////////////////////
+
+//----------------------------------//
+
+//////////////////////////////////////
+//      GLOBAL CONFIG SECTION       //
+//////////////////////////////////////
+
+const port = 1717;
+const db_host = "localhost";
+const db_username = "root";
+const db_password = "";
+const db_database = "privo";
+
+//////////////////////////////////////
+//          IMPORT SECTION          //
+//////////////////////////////////////
+
+import express from 'express';
+import path from 'path';
+import * as Config from "./config.js"; //importo la configurazione di firebase
+import { Server } from "socket.io";
+import { initializeApp } from 'firebase/app';
+import { getAuth, signInWithEmailAndPassword, onAuthStateChanged, signOut } from "firebase/auth";
+import { createConnection } from 'mysql';
+
+//////////////////////////////////////
+//             AUTH PART            //
+//////////////////////////////////////
+
+//initializing firebase
+const app = initializeApp(Config.firebaseConfig);
+const auth = getAuth();
+let user; //variable for storing user data structure
+
+//login function
+function login(email, password) {
+  signInWithEmailAndPassword(auth, email, password)
+  .then((userCredential) => {
+    // Signed in 
+      user = userCredential.user;
+
+      io.emit("logged", user.uid);
+    })
+    .catch((error) => {
+      io.emit("error", error.message);
+    });
+}
+
+//////////////////////////////////////
+//           ROUTING PART           //
+//////////////////////////////////////
+
+const exp = express();
+const __dirname = path.resolve();
+
+exp.use(express.static('public'));
+
+const srv = exp.listen(port, () => {
+  console.log(`Privo Web attivo sulla porta: ` + port + ";");
+});
+
+exp.get('/', (req, res) => {
+  onAuthStateChanged(auth, (user) => {
+    if (user) {
+      res.sendFile(path.join(__dirname + '/public/app.html'));
+    } else {
+      res.sendFile(path.join(__dirname + '/public/login.html'));
+    }
+  });
+});
+
+//////////////////////////////////////
+//           DATABASE PART          //
+//////////////////////////////////////
+
+var con = createConnection({
+  host: db_host,
+  user: db_username,
+  password: db_password,
+  database: db_database
+});
+
+con.connect(function(err) {
+  if (err) throw err;
+  console.log("Database connected!");
+});
+
+//////////////////////////////////////
+//       CHAT MANAGEMENT PART       //
+//////////////////////////////////////
+
+//configuring socket.io
+const io = new Server(srv);
+
+//socket.io events
+io.on("connection", function (socket) {
+  socket.on("login", function (email, password) {
+    login(email, password);
+  });
+
+  socket.on("loadChats", function () {
+    getUserChats(io);
+  });
+
+  socket.on("send-message", (uid, chat_id, body_cr) => {
+    sendMessage(uid, chat_id, body_cr);
+  });
+
+  socket.on("loadHistory", (id) => {
+    loadHistory(id);
+  });
+
+  socket.on("readAll", (uid, chat_id) => {
+    readAll(uid, chat_id);
+  });
+
+  socket.on("disconnect", () => {
+    io.emit("user disconnected", socket.userId);
+  });
+});
+
+function getUserChats(io) {
+  con.query("SELECT DISTINCT members.name, members.surname, members.profile_pic_url, partecipants.id_chat, chats.E2EE_hashed_key FROM chats, partecipants, members WHERE members.uid_members <> '" + user.uid + "' AND members.uid_members = partecipants.id_members AND partecipants.id_chat IN (SELECT DISTINCT chats.id_chat FROM chats, members, partecipants WHERE chats.id_chat = partecipants.id_chat AND partecipants.id_members = '" + user.uid + "') AND partecipants.id_chat = chats.id_chat;", function (err, chats, fields) {
+    con.query("SELECT messages.id_chat, messages.id_member, messages.body, messages.time FROM messages WHERE messages.id_chat IN (SELECT DISTINCT chats.id_chat FROM chats, members, partecipants WHERE chats.id_chat = partecipants.id_chat AND partecipants.id_members = '" + user.uid + "');", function (err, messages, fields) {
+      if (err) throw err;
+  
+      io.emit("getChats", chats, messages);
+    });
+  });
+}
+
+function sendMessage(uid, chat_id, message) {
+  let time = new Date().toISOString().slice(0, 19).replace('T', ' ');
+
+  console.log(new Date());
+
+
+}
+
+function readAll(uid, chat_id) {
+  con.query("UPDATE messages SET messages.status = 2 WHERE messages.id_chat = " + chat_id + " AND messages.id_member = (SELECT DISTINCT members.uid_members FROM members, partecipants, chats WHERE partecipants.id_chat = " + chat_id + " AND partecipants.id_members = members.uid_members AND partecipants.id_members <> '" + uid + "');", function (err, history, fields) {
+    if (err) throw err;
+
+    loadHistory(chat_id);
+  });
+}
+
+function loadHistory(id) {
+  con.query("SELECT DISTINCT * FROM messages WHERE messages.id_chat = " + id + ";", function (err, history, fields) {
+    if (err) throw err;
+
+    io.emit("getHistory", history);
+  });
+}

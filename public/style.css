@@ -1,0 +1,212 @@
+body, html {
+    font-family: -apple-system, BlinkMacSystemFont, sans-serif;
+    -webkit-touch-callout: none; /* iOS Safari */
+    -webkit-user-select: none; /* Safari */
+    -khtml-user-select: none; /* Konqueror HTML */
+    -moz-user-select: none; /* Old versions of Firefox */
+    -ms-user-select: none; /* Internet Explorer/Edge */
+    user-select: none; /* Non-prefixed version, currently
+                                  supported by Chrome, Edge, Opera and Firefox */
+}
+
+.contact {
+    margin: 10px 0;
+    position: relative;
+    overflow: hidden;
+    cursor: pointer;
+    background-color: white;
+    border-radius: 10px;
+    padding: 10px;
+    transition: background-color .1s ease-in-out;
+}
+
+.chat-name {
+    font-weight: 500;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.chat-date {
+    font-size: 12px;
+    opacity: 0.5;
+}
+
+.chat-read-status {
+    font-size: 12px;
+    opacity: 0.5;
+}
+
+p {
+    margin-bottom: 0;
+}
+
+.chat-preview {
+    color: #808385;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.chat-status {
+    color: #00C73E;
+}
+
+.to-read[data-count]:after{
+    position: absolute;
+    right: 0%;
+    top: 1%;
+    content: attr(data-count);
+    font-size: 12px;
+    padding: .6em .9em;
+    border-radius: 999px;
+    line-height: .75em;
+    color: white;
+    background: #4dcd5e;
+    text-align: center;
+    font-weight: bold;
+}
+
+.fa-stack {
+    width: 0;
+    height: 0;
+}
+
+.white-p {
+    color: white;
+}
+
+.mess-count {
+    width: fit-content;
+    padding: 2px 10px;
+    border-radius: 15px;
+    text-align: center;
+    background-color: #57d261;
+}
+
+.chat-list {
+    background-color: white;
+    border-right: 1px solid #ebebeb;
+    height: 100vh;
+    width: 27vw;
+    padding: 0.5px 10px;
+    position: relative;
+}
+
+.input-group-text {
+    padding: 15px;
+    border-radius: 999px;
+    background-color: white;
+}
+
+.email-s {
+    border-radius: 999px;
+    border-left: 0;
+}
+
+.email-s:focus {
+    box-shadow: none;
+    border: 2px solid #096efd;
+    border-left: none;
+}
+
+.chat-list {
+    padding-top: 10px;
+}
+
+.chat {
+    transition: background-color 0.1s ease-in-out;
+}
+
+::-webkit-scrollbar {
+    display: none;
+}
+
+#chat-wallpaper {
+    position: absolute;
+    height: 100vh;
+    width: 100vw;
+    top: 0;
+    left: 0;
+    background: linear-gradient(0deg, rgba(8, 110, 253, 0.427) 0%, rgba(63, 143, 255, 0.427) 100%);
+    z-index: -1000;
+}
+
+.chat-messages {
+    height: calc(100vh - 100px);
+    width: calc(100vw - 27vw);
+    position: absolute;
+    top: 0;
+    left: 27vw;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    padding: 20px;
+    overflow-y: auto;
+}
+
+.message {
+    background-color: white;
+    padding: 8px;
+    margin: 5px 0;
+    margin-left: 17vw;
+    border-radius: 5px;
+    width: fit-content;
+    padding-right: 28px;
+    max-width: 300px;
+    -webkit-box-shadow: rgba(0,0,0,0.2) 0 2px 5px;
+    -moz-box-shadow: rgba(0,0,0,0.2) 0 2px 5px;
+    box-shadow: rgba(0,0,0,0.2) 0 2px 5px;
+}
+
+.own {
+    background-color: #eefedf;
+    margin-left: auto;
+    margin-right: 17vw;
+}
+
+.date-block {
+    margin: 10px auto;
+    background-color: rgba(0, 0, 0, 0.201);
+    color: white;
+    padding: 5px 8px;
+    border-radius: 5px;
+}
+
+#chat-editor {
+    height: 100px;
+    width: calc(100vw - 27vw);
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    padding: 10px 50px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+#body-editor {
+    border-radius: 10px;
+    width: 50%;
+    padding: 15px 25px;
+    border: none;
+    -webkit-box-shadow: rgba(0,0,0,0.2) 0 2px 5px;
+    -moz-box-shadow: rgba(0,0,0,0.2) 0 2px 5px;
+    box-shadow: rgba(0,0,0,0.2) 0 2px 5px;
+}
+
+#send-btn {
+    height: 54px;
+    width: 54px;
+    border-radius: 999px;
+    background-color: white;
+    border: none;
+    margin-left: 10px;
+    -webkit-box-shadow: rgba(0,0,0,0.2) 0 2px 5px;
+    -moz-box-shadow: rgba(0,0,0,0.2) 0 2px 5px;
+    box-shadow: rgba(0,0,0,0.2) 0 2px 5px;
+}
+
+#send-btn:focus {
+    box-shadow: 0 0 0 0.25rem rgba(255, 255, 255, 0.25);
+}
