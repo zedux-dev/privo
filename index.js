@@ -248,3 +248,5 @@ function load_all_chat_messages(id_chat) {
     }
   });
 }
+
+//test
