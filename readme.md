@@ -20,16 +20,20 @@ You can host your own version of Privo for any sort of uses!
 - npm
 
 
-1. Download all needed files
-`git clone https://github.com/zedux-dev/privo.git`
+1. Download all needed files  
+  
+    `git clone https://github.com/zedux-dev/privo.git`
 
-2. Install all node modules
-`cd privo`
-`npm install`
+2. Install all node modules  
+  
+    `cd privo`  
+    `npm install`  
 ![enter image description here](https://i.ibb.co/nBGjNC6/Schermata-2022-01-24-alle-13-07-35.png)
 
-3. `npm start`
-![enter image description here](https://i.ibb.co/JRQ23yM/Schermata-2022-01-24-alle-13-11-18.png)
+3. Run the server
+  
+    `npm start`  
+![enter image description here](https://i.ibb.co/JRQ23yM/Schermata-2022-01-24-alle-13-11-18.png%22%20alt=%22Schermata-2022-01-24-alle-13-11-18)
 
 ## Usage
 
@@ -38,3 +42,4 @@ Just visit:
 
 where **localhost** can also be your machine IP address:
 `192.168.1.24:3000`
+
