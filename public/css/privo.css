@@ -1,0 +1,223 @@
+html {
+    background-color: #667aff;
+}
+
+body {
+    height: 100vh;
+    overflow-y: hidden;
+    overflow-x: hidden;
+}
+
+.login {
+    background-color: #e6e9ff;
+}
+
+.login-wrapper {
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.separator {
+    height: 8px;
+    display: block;
+}
+
+.separator-big {
+    height: 22px;
+    display: block;
+}
+
+::-moz-selection { /* Code for Firefox */
+    color: white;
+    background: #667aff;
+}
+  
+::selection {
+    color: white;
+    background: #667aff;
+}
+
+.login-form {
+    background-color: #667aff;
+    padding: 15px;
+    border-radius: 5px;
+    width: 300px;
+}
+
+.login-form > .title {
+    text-align: center;
+}
+
+.top-bar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 20px;
+    background-color: #667aff;
+}
+
+.sub-top-bar {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start;
+    background-color: #7a8cff;
+    color: #d2dbff;
+}
+
+.users-handle {
+    font-size: 20px;
+    font-weight: 600;
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px 20px;
+    cursor: pointer;
+}
+
+.users {
+    -webkit-box-shadow: inset 0px 2px 0px 0px #d2dbff41; 
+    box-shadow: inset 0px 2px 0px 0px #d2dbff41;
+    color: white;
+    width: 100%;
+    padding: 0 25px;
+    margin-bottom: 0;
+    font-size: 20px;
+    font-weight: 500;
+    max-height: 150px;
+    overflow-y: auto;
+    transition: .2s max-height ease-in-out;
+}
+
+.messages-list {
+    height: calc(100% - 233px);
+    display: flex;
+    flex-direction: column;
+    flex-wrap: nowrap;
+    overflow-y: auto;
+    background-color: white;
+    padding: 20px;
+}
+
+.room-info {
+    background-color: rgba(255, 255, 255, 0.425);
+    color: #c8d0ff;
+    font-size: 18px;
+    padding: 10px 20px;
+}
+
+.hidden {
+    max-height: 0;
+}
+
+.title {
+    color: white;
+    font-family: 'Alegreya', serif;
+    margin-bottom: 0;
+}
+
+.subtitle {
+    margin-bottom: 0;
+}
+
+li {
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
+    list-style-position: inside;
+    margin: 15px 0 15px 0;
+}
+
+.btn-white {
+    background-color: white;
+    font-weight: 600;
+    color: #7a8cff;
+    width: 100%;
+}
+
+.btn-privo {
+    background-color: #7a8cff;
+    color: white;
+}
+
+.btn-privo:hover {
+    background-color: #8191ff;
+    color: white;
+}
+
+.btn-privo:focus {
+    box-shadow: 0 0 0 0.2rem hsl(232, 100%, 74%, 30%);
+}
+
+.container-fluid {
+    height: 100%;
+}
+
+.editor {
+    background-color: #667aff;
+    padding: 10px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.editor > input {
+    width: calc(100% - 55px);
+}
+
+.form-control {
+    border: 0;
+    background-color: #7a8cff;
+    color: white;
+}
+
+.form-control:focus {
+    background-color: #7a8cff;
+    color: white;
+}
+
+.form-control::placeholder {
+    color: #d2dbff;
+}
+
+.message {
+    background-color: #e3e7ff;
+    border-radius: 5px;
+    padding: 10px 15px;
+    position: relative;
+    margin-bottom: 10px;
+    height: fit-content;
+}
+
+.message::after {
+    position: absolute;
+    left: -10px;
+    top: 10px;
+    content: "";
+    width: 0;
+    height: 0;
+    border-top: 10px solid transparent;
+    border-bottom: 10px solid transparent;
+    border-right: 10px solid #e3e7ff;
+}
+
+.meta {
+    color: #667aff;
+    font-weight: 600;
+    font-size: 14px;
+    margin-bottom: 5px;
+}
+
+.meta > span {
+    color: #667aff;
+    opacity: 0.8;
+    font-weight: normal;
+}
+
+.text {
+    color: #1f2235;
+    margin-bottom: 5px;
+}
