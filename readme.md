@@ -29,7 +29,7 @@ You can host your own version of Privo for any sort of uses!
 ![enter image description here](https://i.ibb.co/nBGjNC6/Schermata-2022-01-24-alle-13-07-35.png)
 
 3. `npm start`
-![enter image description here](https://i.ibb.co/JRQ23yM/Schermata-2022-01-24-alle-13-11-18.png%22%20alt=%22Schermata-2022-01-24-alle-13-11-18)
+![enter image description here](https://i.ibb.co/JRQ23yM/Schermata-2022-01-24-alle-13-11-18.png)
 
 ## Usage
 
