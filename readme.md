@@ -36,11 +36,11 @@ You can host your own version of Privo for any sort of uses!
 
 ## Usage
 
-Just visit:
+Just visit:  
 `localhost:3000`
 
-where **localhost** can also be your machine IP address:
-`192.168.1.24:3000`
+where **localhost** can also be your machine IP address:  
+es: `192.168.1.24:3000`
 
 ## Documentation
 
