@@ -42,7 +42,3 @@ Just visit:
 where **localhost** can also be your machine IP address:  
   es: `192.168.1.24:3000`
 
-## Documentation
-
-You can read my thesis here (which is like a sort of documentation for who wants to edit this app source):  
-[Documentation](https://example.com)
