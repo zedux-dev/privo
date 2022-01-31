@@ -52,8 +52,9 @@ chatForm.addEventListener("submit", e => {
     e.preventDefault();
 
     const msg = e.target.elements.msg.value;
+    const sanit = msg.toString();
 
-    socket.emit("chatMessage", msg);
+    socket.emit("chatMessage", sanit);
 
     e.target.elements.msg.value = "";
     e.target.elements.msg.focus();
