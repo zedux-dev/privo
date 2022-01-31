@@ -19,12 +19,11 @@ console.log(`
 `);
 
 // ottengo username e codice stanza dai parametri (GET) dell'url
-const { username, room } = Qs.parse(location.search, {
-    ignoreQueryPrefix: true
-});
+var username = sessionStorage.getItem("username");
+var room = sessionStorage.getItem("room");
 
 // se cerco di accedere alla pagina chat.html manualmente (bypassando il login) senza impostare username e stanza, mi reindirizza al login
-if(urlParams.get("username") === null && urlParams.get("room") === null) {
+if(username == null && room == null) {
     window.location.href = "/";
 }
 
@@ -51,10 +50,10 @@ socket.on("message", message => {
 chatForm.addEventListener("submit", e => {
     e.preventDefault();
 
-    const msg = e.target.elements.msg.value;
-    const sanit = msg.toString();
+    // pulisco la stringa per evitare attacchi XSS
+    const msg = sanitize(e.target.elements.msg.value);
 
-    socket.emit("chatMessage", sanit);
+    socket.emit("chatMessage", msg);
 
     e.target.elements.msg.value = "";
     e.target.elements.msg.focus();

@@ -27,23 +27,37 @@
     <body class="login">
         <div class="container-fluid">
             <div class="row login-wrapper">
-                <form class="login-form" action="chat.html">
+                <div class="login-form">
                     <h1 class="title">Privo</h1>
                     <span class="separator"></span>
 
-                    <input name="username" class="form-control" spellcheck="false" type="text" id="msg" placeholder="Username...">
+                    <input id="username" class="form-control" spellcheck="false" type="text" placeholder="Username...">
                     <span class="separator"></span>
 
-                    <input name="room" class="form-control" spellcheck="false" type="text" id="msg" placeholder="Codice stanza...">
+                    <input id="room" class="form-control" spellcheck="false" type="text" placeholder="Codice stanza...">
                     <span class="separator-big"></span>
 
-                    <button type="submit" class="btn btn-white">Accedi</button>
-                </form>
+                    <button class="btn btn-white" onclick="login();">Accedi</button>
+                </div>
             </div>
         </div>
 
         <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.6/umd/popper.min.js" integrity="sha384-wHAiFfRlMFy6i5SRaxvfOCifBUQy1xHdJ/yoi7FRNXMRBu5WHdZYu1hA6ZOblgut" crossorigin="anonymous"></script>
         <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/js/bootstrap.min.js" integrity="sha384-B0UglyR+jN6CkvvICOB2joaf5I4l3gm9GU6Hc1og6Ls7i6U/mkkaduKaBhlAXv9k" crossorigin="anonymous"></script>
+        <script src="./js/sanitizer.js"></script>
+
+        <script>
+            function login() {
+                // pulisco la stringa per evitare attacchi XSS
+                var username = sanitize(document.getElementById("username").value);
+                var room = sanitize(document.getElementById("room").value);
+    
+                sessionStorage.setItem("username", username);
+                sessionStorage.setItem("room", room);
+
+                location.href = "chat.html";
+            }
+        </script>
     </body>
 </html>
